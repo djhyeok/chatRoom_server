@@ -1,0 +1,7 @@
+#pragma once
+#ifndef CHATROOM_SERVER
+#define CHATROOM_SERVER
+
+LRESULT CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM);
+
+#endif
