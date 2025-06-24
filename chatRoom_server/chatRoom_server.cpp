@@ -21,7 +21,7 @@ unsigned short g_uPort;
 //소캣api의 리턴변수
 int nReturn;
 
-HANDLE hSemaphore;
+HANDLE g_hSemaphore;
 //소켓통신 환경변수
 ENV g_env;
 HWND g_hWndMain;
@@ -82,7 +82,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam)
 		InitCommonControls();
 		g_hWndMain = hWnd;
 		//세마포어
-		hSemaphore = CreateSemaphore(NULL, 1, 1, NULL);
+		g_hSemaphore = CreateSemaphore(NULL, 1, 1, NULL);
 		//head node 할당(user,room)
 		userHead = createUserNode();
 		roomHead = createRoomNode();

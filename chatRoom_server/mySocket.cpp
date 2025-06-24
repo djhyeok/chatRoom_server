@@ -8,7 +8,7 @@ extern ENV g_env;
 extern HWND g_hRoomList;
 extern HWND g_hWndMain;
 extern int g_Fnum;
-extern HANDLE hSemaphore;
+extern HANDLE g_hSemaphore;
 
 /*
 void cutMsg(char* msg,char* buffer): buffer에서 메시지 잘라서 msg에 담음
@@ -146,7 +146,7 @@ DWORD WINAPI RecvThreadFunc(LPVOID Param) {
 			//파일 전송 요청 "F파일크기"
 			else if (g_env.buf[0] == 'F') {
 				//파일 전송 은 한 클라이언트가 끝날때까지 다른 클라이언트는 대기
-				WaitForSingleObject(hSemaphore, INFINITE);
+				WaitForSingleObject(g_hSemaphore, INFINITE);
 				cutMsg(strTemp, g_env.buf);
 				imgSize = atoi(strTemp);
 				lstrcpy(msgTemp, g_env.buf);
@@ -170,7 +170,7 @@ DWORD WINAPI RecvThreadFunc(LPVOID Param) {
 					}
 					recvSize += 1024;
 				}
-				ReleaseSemaphore(hSemaphore, 1, NULL);
+				ReleaseSemaphore(g_hSemaphore, 1, NULL);
 			}
 			//채팅방 나가기요청		"E방번호"
 			else if (g_env.buf[0] == 'E') {
